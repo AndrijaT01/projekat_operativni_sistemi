@@ -10,9 +10,7 @@
 #include "../lib/console.h"
 #include "../lib/hw.h"
 
-
 uint64 k_syscall_dispatch(uint64 code, uint64 a1, uint64 a2, uint64 a3, uint64 a4) {
-
 
     switch (code) {
         case SYS_MEM_ALLOC: {
@@ -85,36 +83,8 @@ uint64 k_syscall_dispatch(uint64 code, uint64 a1, uint64 a2, uint64 a3, uint64 a
             // return (uint64)(uint8)c;
         }
 
-
         case SYS_TIME_SLEEP:
         default:
             return (uint64)-1;
     }
 }
-
-/* ===== MODIFIKACIJE_ZA_REZERVU_SYSCALL_DISPATCH BEGIN =====
-// Dodaj u switch(k_syscall_dispatch):
-// case SYS_THREAD_GET_ID:
-//     return TCB::getRunningId();
-//
-// case SYS_THREAD_JOIN:
-//     TCB::join((TCB*)a1);
-//     return 0;
-//
-// case SYS_THREAD_PAIR:
-//     TCB::pair((TCB*)a1, (TCB*)a2);
-//     return 0;
-//
-// case SYS_THREAD_SYNC:
-//     TCB::sync();
-//     return 0;
-//
-// case SYS_THREAD_ADD_CHILD:
-//     TCB::addChild((TCB*)a1, (TCB*)a2);
-//     return 0;
-//
-// case SYS_THREAD_JOIN_ALL:
-//     TCB::joinAll();
-//     return 0;
-
-===== MODIFIKACIJE_ZA_REZERVU_SYSCALL_DISPATCH END ===== */
