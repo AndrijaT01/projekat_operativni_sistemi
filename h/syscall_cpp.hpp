@@ -68,14 +68,3 @@ public:
 };
 
  #endif //PROJECT_BASE_V1_1_SYSCALL_CPP_H
-
-/* ===== MODIFIKACIJE_ZA_REZERVU_SYSCALL_CPP_HPP BEGIN =====
-// Dodaj u class Thread, public deo:
-// static int getThreadId();
-// void join();
-// static void pair(Thread* first, Thread* second);
-// void sync();
-// void addChild(Thread* child);
-// void joinAll();
-
-===== MODIFIKACIJE_ZA_REZERVU_SYSCALL_CPP_HPP END ===== */
