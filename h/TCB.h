@@ -10,7 +10,6 @@ public:
     static void initMain();
     static void initIdle();
 
-
     bool isFinished() const { return state == FINISHED; }
 
     using Body = void(*)(void*);
@@ -41,7 +40,6 @@ public:
     static TCB* running;
     static TCB* mainThread;
     static TCB* idleThread;
-
 
     TCB* next = nullptr;
 
@@ -75,30 +73,3 @@ private:
 extern "C" void contextSwitch(TCB::Context* oldContext, TCB::Context* newContext);
 
 #endif
-
-/* ===== MODIFIKACIJE_ZA_REZERVU_TCB_H BEGIN =====
-// Dodaj blizu include-ova:
-// class SEM;
-
-// Dodaj u public deo klase TCB:
-// uint64 getId() const { return id; }
-// static uint64 getRunningId();
-// static void join(TCB* target);
-// static void pair(TCB* first, TCB* second);
-// static void sync();
-// static void addChild(TCB* parent, TCB* child);
-// static void joinAll();
-
-// Dodaj u private deo klase TCB:
-// void initModResources();
-// void notifyParentFinished();
-// uint64 id = 0;
-// static uint64 nextId;
-// SEM* pairSem = nullptr;
-// TCB* pairedThread = nullptr;
-// bool syncReached = false;
-// TCB* parent = nullptr;
-// int childCount = 0;
-// SEM* childrenSem = nullptr;
-
-===== MODIFIKACIJE_ZA_REZERVU_TCB_H END ===== */
