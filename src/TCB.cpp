@@ -26,8 +26,6 @@ void TCB::idleBody(void*) {
 void TCB::initIdle() {
     if (idleThread) return;
 
-
-
     void* tcbMem = Memory_allocator::mem_alloc(sizeof(TCB));
     if (!tcbMem) return;
 
@@ -70,7 +68,6 @@ void TCB::initMain() {
     // context ostaje kakav jeste dok prvi dispatch ne sačuva stvarni ra/sp
     running = mainThread;
 
-
     initIdle();
 }
 TCB* TCB::createThread(Body body, void* arg, void* stack_space_end) {
@@ -100,7 +97,6 @@ TCB* TCB::createThread(Body body, void* arg, void* stack_space_end, bool isSyste
     Scheduler::put(t);
     return t;
 }
-
 
 void TCB::dispatch() {
     TCB* old = running;
@@ -155,7 +151,6 @@ void TCB::threadWrapper() {
     }
 }
 
-
 void TCB::tryFreeFinished() {
     // privremeno prazno
 }
@@ -165,90 +160,3 @@ void TCB::yield() {
     TCB::dispatch();
     Riscv::popRegs();
 }
-
-/* ===== MODIFIKACIJE_ZA_REZERVU_TCB_CPP BEGIN =====
-// Dodaj include:
-// #include "../h/SEM.h"
-
-// Dodaj staticku inicijalizaciju:
-// uint64 TCB::nextId = 1;
-
-// Dodaj implementacije:
-// void TCB::initModResources() {
-//     id = nextId++;
-//     pairSem = SEM::create(0);
-//     childrenSem = SEM::create(0);
-//     pairedThread = nullptr;
-//     syncReached = false;
-//     parent = nullptr;
-//     childCount = 0;
-// }
-//
-// uint64 TCB::getRunningId() {
-//     return running ? running->id : 0;
-// }
-//
-// void TCB::join(TCB* target) {
-//     if (!target) return;
-//     if (target == running) return;
-//     while (!target->isFinished()) {
-//         TCB::yield();
-//     }
-// }
-//
-// void TCB::pair(TCB* first, TCB* second) {
-//     if (!first || !second) return;
-//     first->pairedThread = second;
-//     second->pairedThread = first;
-//     first->syncReached = false;
-//     second->syncReached = false;
-// }
-//
-// void TCB::sync() {
-//     TCB* me = running;
-//     if (!me || !me->pairedThread || !me->pairSem) return;
-//     TCB* other = me->pairedThread;
-//     if (!other->syncReached) {
-//         me->syncReached = true;
-//         me->pairSem->wait();
-//     } else {
-//         other->syncReached = false;
-//         me->syncReached = false;
-//         other->pairSem->signal();
-//     }
-// }
-//
-// void TCB::addChild(TCB* parent, TCB* child) {
-//     if (!parent || !child) return;
-//     child->parent = parent;
-//     parent->childCount++;
-// }
-//
-// void TCB::joinAll() {
-//     TCB* me = running;
-//     if (!me || !me->childrenSem) return;
-//     while (me->childCount > 0) {
-//         me->childrenSem->wait();
-//     }
-// }
-//
-// void TCB::notifyParentFinished() {
-//     if (parent && parent->childCount > 0) {
-//         parent->childCount--;
-//         if (parent->childCount == 0 && parent->childrenSem) {
-//             parent->childrenSem->signal();
-//         }
-//     }
-// }
-
-// Na ova mesta ubaci po jednu liniju kada aktiviras modifikacije:
-// 1) U initIdle(), posle kreiranja idle niti:
-//    idleThread->initModResources();
-// 2) U initMain(), posle kreiranja main niti:
-//    mainThread->initModResources();
-// 3) U createThread(), posle kreiranja niti:
-//    t->initModResources();
-// 4) U exit(), pre yield():
-//    running->notifyParentFinished();
-
-===== MODIFIKACIJE_ZA_REZERVU_TCB_CPP END ===== */
