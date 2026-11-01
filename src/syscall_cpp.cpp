@@ -101,36 +101,3 @@ char Console::getc() {
 void Console::putc(char c) {
     ::putc(c);
 }
-
-
-/* ===== MODIFIKACIJE_ZA_REZERVU_SYSCALL_CPP_CPP BEGIN =====
-// Dodaj implementacije:
-// int Thread::getThreadId() {
-//     return thread_get_id();
-// }
-//
-// void Thread::join() {
-//     if (myHandle) thread_join(myHandle);
-// }
-//
-// void Thread::pair(Thread* first, Thread* second) {
-//     if (!first || !second) return;
-//     if (!first->myHandle || !second->myHandle) return;
-//     thread_pair(first->myHandle, second->myHandle);
-// }
-//
-// void Thread::sync() {
-//     thread_sync();
-// }
-//
-// void Thread::addChild(Thread* child) {
-//     if (!child) return;
-//     if (!myHandle || !child->myHandle) return;
-//     thread_add_child(myHandle, child->myHandle);
-// }
-//
-// void Thread::joinAll() {
-//     thread_join_all();
-// }
-
-===== MODIFIKACIJE_ZA_REZERVU_SYSCALL_CPP_CPP END ===== */
