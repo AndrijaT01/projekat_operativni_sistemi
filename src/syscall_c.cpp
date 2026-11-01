@@ -88,33 +88,3 @@ int time_sleep(time_t) { return -1; }
 // Console
 char getc() { return (char)do_ecall(SYS_GETC); }
 void putc(char c) { (void)do_ecall(SYS_PUTC, (uint64)(unsigned char)c); }
-
-
-
-/* ===== MODIFIKACIJE_ZA_REZERVU_SYSCALL_C_CPP BEGIN =====
-// Dodaj implementacije:
-// int thread_get_id() {
-//     return (int)do_ecall(SYS_THREAD_GET_ID);
-// }
-//
-// void thread_join(thread_t handle) {
-//     (void)do_ecall(SYS_THREAD_JOIN, (uint64)handle);
-// }
-//
-// void thread_pair(thread_t first, thread_t second) {
-//     (void)do_ecall(SYS_THREAD_PAIR, (uint64)first, (uint64)second);
-// }
-//
-// void thread_sync() {
-//     (void)do_ecall(SYS_THREAD_SYNC);
-// }
-//
-// void thread_add_child(thread_t parent, thread_t child) {
-//     (void)do_ecall(SYS_THREAD_ADD_CHILD, (uint64)parent, (uint64)child);
-// }
-//
-// void thread_join_all() {
-//     (void)do_ecall(SYS_THREAD_JOIN_ALL);
-// }
-
-===== MODIFIKACIJE_ZA_REZERVU_SYSCALL_C_CPP END ===== */
