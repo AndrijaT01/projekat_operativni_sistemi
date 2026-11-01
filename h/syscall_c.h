@@ -3,10 +3,7 @@
 #ifndef PROJECT_BASE_V1_1_SYSCALL_C_H
 #define PROJECT_BASE_V1_1_SYSCALL_C_H
 
-
 #include "../lib/hw.h"
-
-
 
 //MEM
 // 0x01
@@ -14,7 +11,6 @@ void* mem_alloc(size_t size);
 
 // 0x02
 int mem_free(void*);
-
 
 // 0x03
 size_t mem_get_free_space();
@@ -49,14 +45,3 @@ char getc();
 void putc(char);
 
 #endif //PROJECT_BASE_V1_1_SYSCALL_C_H
-
-/* ===== MODIFIKACIJE_ZA_REZERVU_SYSCALL_C_H BEGIN =====
-// Dodaj deklaracije:
-// int thread_get_id();
-// void thread_join(thread_t handle);
-// void thread_pair(thread_t first, thread_t second);
-// void thread_sync();
-// void thread_add_child(thread_t parent, thread_t child);
-// void thread_join_all();
-
-===== MODIFIKACIJE_ZA_REZERVU_SYSCALL_C_H END ===== */
